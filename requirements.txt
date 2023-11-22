@@ -11,12 +11,14 @@ djangorestframework==3.14.0
 djangorestframework-simplejwt==5.3.0
 drf-spectacular==0.26.5
 executing==2.0.1
+gunicorn==21.2.0
 inflection==0.5.1
 ipython==8.17.2
 jedi==0.19.1
 jsonschema==4.20.0
 jsonschema-specifications==2023.11.1
 matplotlib-inline==0.1.6
+packaging==23.2
 parso==0.8.3
 Pillow==10.1.0
 prompt-toolkit==3.0.41
