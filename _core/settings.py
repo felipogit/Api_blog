@@ -122,8 +122,18 @@ if DATABASE_URL:
     DATABASES['default'].update(db_from_env)
 
 if not DEBUG:
+
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+    # Configuração para arquivos de mídia usando WhiteNoise
+    MIDDLEWARE += ['whitenoise.middleware.WhiteNoiseMiddleware']
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
+
+    # Adicione a seguinte linha para garantir que o Django sirva arquivos de mídia em produção
+    # (use apenas para desenvolvimento, NÃO para produção real)
+    MEDIA_URL = '/media/'
+    
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -159,7 +169,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -182,6 +191,3 @@ REST_FRAMEWORK = {
 CORS_ORIGIN_ALLOW_ALL = True
 
 
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "mediafiles")
-
-MEDIA_URL = '/media/'
