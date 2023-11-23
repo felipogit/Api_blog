@@ -1,7 +1,9 @@
 from django.db import models
+import cloudinary.uploader
 
 def upload_post_image(instance, filename):
-    return 'images/{filename}'.format(filename=filename)
+    result = cloudinary.uploader.upload(instance.path)  # Use instance.path para obter o caminho local do arquivo
+    return result['url']
 
 class Post(models.Model):
     title = models.CharField(max_length=255)

@@ -15,10 +15,19 @@ import os
 from dotenv import load_dotenv
 from django.core.management.utils import get_random_secret_key
 import dj_database_url
+import cloudinary
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+cloudinary.config( 
+  cloud_name = "dsq93mfak", 
+  api_key = "364459295389662", 
+  api_secret = "y2jgzT2K3NYaiiZmLxu6TzcdT2Y", 
+  secure = True
+)
 
 
 # Quick-start development settings - unsuitable for production
@@ -53,6 +62,7 @@ THIRD_PARTY_APPS = [
     "rest_framework",
     "corsheaders",
     'drf_spectacular',
+    'cloudinary',
     
     
 ]
@@ -122,18 +132,8 @@ if DATABASE_URL:
     DATABASES['default'].update(db_from_env)
 
 if not DEBUG:
-
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-    # Configuração para arquivos de mídia usando WhiteNoise
-    MIDDLEWARE += ['whitenoise.middleware.WhiteNoiseMiddleware']
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
-
-    # Adicione a seguinte linha para garantir que o Django sirva arquivos de mídia em produção
-    # (use apenas para desenvolvimento, NÃO para produção real)
-    MEDIA_URL = '/media/'
-    
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -170,6 +170,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
@@ -189,5 +190,8 @@ REST_FRAMEWORK = {
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+
+# settings.py
 
 
